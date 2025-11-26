@@ -1,4 +1,4 @@
-name: Deploy → XAMPP (Port 2211 – /opt/lampp/htdocs)
+name: Deploy → XAMPP FTP port 2211 (Timeout Fixed)
 
 on:
   push:
@@ -20,10 +20,10 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
+          username: ${{ secrets.SSH_USER }}  # sagar
           password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}          # 2211
+          port: ${{ secrets.FTP_PORT }}     # 2211
           local-dir: ./dist/
-          server-dir: /opt/lampp/htdocs/         # ← exactly where you want it
+          server-dir: /opt/lampp/htdocs/    # your exact path
           dangerous-clean-slate: true
-          timeout: 180
+          timeout: 200000
