@@ -1,4 +1,4 @@
-name: Deploy Frontend to VPS
+name: Deploy Frontend to VPS (Password Login)
 
 on:
   push:
@@ -18,14 +18,13 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      # ← FIXED: added port here too
       - name: Upload dist to VPS
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}       # ← THIS LINE WAS MISSING
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          password: ${{ secrets.SSH_PASSWORD }}   # ← password instead of key
           source: "dist/*"
           target: "/opt/lampp/htdocs/"
           overwrite: true
@@ -36,5 +35,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}   # ← same here
           script: sudo /opt/lampp/lampp restart
