@@ -31,7 +31,7 @@ const Navbar = ({ companySettings, getLogoUrl }) => {
               className="flex items-center gap-2 text-gray-700 hover:text-primary-600 font-semibold transition-colors"
             >
               <FaBriefcase />
-              Open Positionsss
+              Opennn Positionsss
             </a>
           
            
