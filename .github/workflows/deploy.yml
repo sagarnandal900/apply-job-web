@@ -1,0 +1,30 @@
+name: Deploy → XAMPP FTP port 2211 (Timeout Fixed)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy to /opt/lampp/htdocs
+        uses: appleboy/scp-action@master          # ← changed to the action that supports SFTP + custom port + password
+        with:
+          host: ${{ secrets.FTP_HOST }}           # ← keep your existing secret names
+          username: ${{ secrets.SSH_USER }}       # ← sagar (keep exactly this)
+          password: ${{ secrets.FTP_PASSWORD }}   # ← keep exactly this
+          port: ${{ secrets.FTP_PORT }}           # ← 2211 (keep exactly this)
+          source: "dist/*"
+          target: "/opt/lampp/htdocs/"
+          overwrite: true
+          timeout: "60s"
+          command_timeout: "15m"
