@@ -1,4 +1,4 @@
-name: Deploy Frontend to VPS (Password Login)
+name: Deploy → XAMPP (Port 2211 – /opt/lampp/htdocs)
 
 on:
   push:
@@ -9,31 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
       - run: npm ci
       - run: npm run build
 
-      - name: Upload dist to VPS
-        uses: appleboy/scp-action@master
+      - name: Deploy to /opt/lampp/htdocs
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          password: ${{ secrets.SSH_PASSWORD }}   # ← password instead of key
-          source: "dist/*"
-          target: "/opt/lampp/htdocs/"
-          overwrite: true
-
-      - name: Restart LAMPP
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          password: ${{ secrets.SSH_PASSWORD }}   # ← same here
-          script: sudo /opt/lampp/lampp restart
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}          # 2211
+          local-dir: ./dist/
+          server-dir: /opt/lampp/htdocs/         # ← exactly where you want it
+          dangerous-clean-slate: true
+          timeout: 180
