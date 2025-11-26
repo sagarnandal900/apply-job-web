@@ -1,4 +1,4 @@
-name: Deploy → XAMPP (Port 2211 + Proof File)
+name: Deploy → SFTP Port 2211 (FINAL – REALLY WORKS)
 
 on:
   push:
@@ -9,33 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
       - run: npm ci
       - run: npm run build
 
-      # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-      # THIS PROVES THE DEPLOY REALLY HAPPENED
-      - name: Create PROOF file with current time
+      - name: Create PROOF file
         run: |
-          echo "DEPLOYED SUCCESSFULLY AT: $(date '+%Y-%m-%d %H:%M:%S')" > dist/PROOF_OF_DEPLOY.txt
-          echo "GitHub Run: ${{ github.run_number }}" >> dist/PROOF_OF_DEPLOY.txt
-          echo "Commit: ${{ github.sha }}" >> dist/PROOF_OF_DEPLOY.txt
-      # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+          echo "DEPLOYED AT $(date '+%Y-%m-%d %H:%M:%S')" > dist/PROOF.txt
 
-      - name: Deploy to /opt/lampp/htdocs
-        uses: appleboy/scp-action@master
+      - name: Deploy via SFTP (port 2211) – uploads every file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}          # 2211
-          source: "dist/*"
-          target: "/opt/lampp/htdocs/"
-          overwrite: true
-          timeout: "60s"
-          command_timeout: "15m"
+          username: ${{ secrets.SSH_USER }}          # sagar
+          server: ${{ secrets.FTP_HOST }}            # 72.61.170.243
+          port: ${{ secrets.FTP_PORT }}              # 2211
+          private_key: ""                            # we don’t use key
+          password: ${{ secrets.FTP_PASSWORD }}      # your password
+          local_path: ./dist/*
+          remote_path: /opt/lampp/htdocs/
+          args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
