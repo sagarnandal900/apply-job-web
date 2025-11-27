@@ -21,7 +21,7 @@ const Navbar = ({ companySettings, getLogoUrl }) => {
               />
             )}
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-              {companySettings?.companyName || 'Job Application Portal'}
+              {/* {companySettings?.companyName || 'Job Application Portal'} */}
             </h1>
           </div>
 
