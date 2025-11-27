@@ -15,8 +15,7 @@ import {
   FaInstagram,
   FaRocket
 } from 'react-icons/fa';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://103.122.85.61:5001/api';
+import { API_URL as API_BASE_URL } from '../services/api';
 
 const HomeContentCMS = () => {
   const [loading, setLoading] = useState(true);

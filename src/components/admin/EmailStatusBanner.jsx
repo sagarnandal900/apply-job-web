@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaCog } from 'react-icons/fa';
+import { API_URL } from '../../services/api';
 
 const EmailStatusBanner = () => {
   const [status, setStatus] = useState(null);
@@ -12,7 +13,7 @@ const EmailStatusBanner = () => {
 
   const checkEmailStatus = async () => {
     try {
-      const response = await fetch('http://103.122.85.61:5001/api/email-config/status', {
+      const response = await fetch(`${API_URL}/email-config/status`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

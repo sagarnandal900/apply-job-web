@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaBriefcase, FaInfoCircle } from 'react-icons/fa';
+import { BASE_URL } from '../../services/api';
 
 const Navbar = ({ companySettings, getLogoUrl }) => {
   return (
@@ -10,7 +11,7 @@ const Navbar = ({ companySettings, getLogoUrl }) => {
           <div className="flex items-center gap-3">
             {companySettings?.logo && (
               <img 
-                src={getLogoUrl ? getLogoUrl(companySettings.logo) : `http://103.122.85.61:5001${companySettings.logo}`}
+                src={getLogoUrl ? getLogoUrl(companySettings.logo) : `${BASE_URL}${companySettings.logo}`}
                 alt={companySettings.companyName} 
                 className="h-12 w-auto object-contain"
                 onError={(e) => {

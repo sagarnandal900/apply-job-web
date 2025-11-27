@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FiMail, FiCalendar, FiSettings, FiSave, FiRefreshCw, FiCheck, FiAlertCircle } from 'react-icons/fi';
-import api from '../services/api';
+import api, { API_URL, BASE_URL } from '../services/api';
 import { toast } from 'react-toastify';
 
 const IntegrationSettings = () => {
@@ -103,7 +103,7 @@ const IntegrationSettings = () => {
       await handleSave();
       
       // Open OAuth window
-      const authUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/integrations/google/auth`;
+      const authUrl = `${API_URL}/integrations/google/auth`;
       const width = 600;
       const height = 700;
       const left = window.screen.width / 2 - width / 2;
@@ -656,12 +656,12 @@ const IntegrationSettings = () => {
                     <strong>Add this redirect URI:</strong>
                     <div className="flex items-center gap-2 mt-1">
                       <code className="bg-white px-2 py-1 rounded border border-purple-300 text-xs">
-                        http://localhost:5001/api/integrations/google/callback
+                        {API_URL}/integrations/google/callback
                       </code>
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText('http://localhost:5001/api/integrations/google/callback');
+                          navigator.clipboard.writeText(`${API_URL}/integrations/google/callback`);
                           toast.success('✅ Redirect URI copied!');
                         }}
                         className="px-2 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-xs"

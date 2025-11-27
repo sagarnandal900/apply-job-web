@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://103.122.85.61:5001/api';
+import { API_URL } from './api';
 
 // Company Settings API
 export const companySettingsAPI = {

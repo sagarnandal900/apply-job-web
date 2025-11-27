@@ -3,7 +3,7 @@ import Navbar from '../components/landing/Navbar';
 import HeroSection from '../components/landing/HeroSection';
 import PositionCard from '../components/landing/PositionCard';
 import ApplicationForm from '../components/application/ApplicationForm';
-import { positionsAPI, companySettingsAPI } from '../services/api';
+import { positionsAPI, companySettingsAPI, API_URL, BASE_URL } from '../services/api';
 import { toast } from 'react-toastify';
 
 const Home = () => {
@@ -31,8 +31,7 @@ const Home = () => {
 
   const fetchHomeContent = async () => {
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://103.122.85.61:5001/api';
-      const response = await fetch(`${API_BASE_URL}/home-content`);
+      const response = await fetch(`${API_URL}/home-content`);
       const data = await response.json();
       if (data.success) {
         setHomeContent(data.data);
@@ -44,8 +43,7 @@ const Home = () => {
 
   const getLogoUrl = (logoPath) => {
     if (!logoPath) return '';
-    const API_BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://103.122.85.61:5001';
-    return `${API_BASE_URL}${logoPath}`;
+    return `${BASE_URL}${logoPath}`;
   };
 
   const fetchPositions = async () => {

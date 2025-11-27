@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { companySettingsAPI } from '../../services/api';
+import { companySettingsAPI, BASE_URL } from '../../services/api';
 import { toast } from 'react-toastify';
 import { FaSave, FaBuilding, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe, FaImage } from 'react-icons/fa';
 
@@ -30,8 +30,7 @@ const CompanySettings = () => {
       const data = response.data.data;
       setSettings(data);
       if (data.logo) {
-        const API_BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://103.122.85.61:5001';
-        setLogoPreview(`${API_BASE_URL}${data.logo}`);
+        setLogoPreview(`${BASE_URL}${data.logo}`);
       }
     } catch (error) {
       toast.error('Failed to load company settings');

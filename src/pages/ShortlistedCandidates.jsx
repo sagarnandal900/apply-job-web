@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 import { FaStar, FaEnvelope, FaPhone, FaEye, FaFileDownload, FaBrain, FaFilter, FaTimes, FaCalendar } from 'react-icons/fa';
 import axios from 'axios';
 import InterviewScheduleModal from '../components/InterviewScheduleModal';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+import { API_URL } from '../services/api';
 
 const ShortlistedCandidates = () => {
   const [loading, setLoading] = useState(true);

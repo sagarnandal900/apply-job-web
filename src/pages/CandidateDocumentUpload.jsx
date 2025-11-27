@@ -3,8 +3,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { FaUpload, FaCheckCircle, FaTimesCircle, FaFileAlt, FaTrash, FaArrowLeft } from 'react-icons/fa';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+import { API_URL } from '../services/api';
 
 const CandidateDocumentUpload = () => {
   const { selectedCandidateId } = useParams();

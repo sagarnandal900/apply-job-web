@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// API base URL - change this to your backend URL
-// const API_URL = import.meta.env.VITE_API_URL || 'http://103.122.85.61:5001/api';
-const API_URL = import.meta.env.VITE_API_URL || 'https://jobs.wizoneit.com/api/api';
+// API base URL - change this to your backend URL (SINGLE SOURCE OF TRUTH)
+export const API_URL = import.meta.env.VITE_API_URL || 'https://jobs.wizoneit.com/api/api';
+
+// Base URL without /api for direct file access
+export const BASE_URL = API_URL.replace('/api/api', '/api').replace('/api', '');
 
 // Create axios instance
 const api = axios.create({

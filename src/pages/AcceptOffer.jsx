@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaCheckCircle, FaTimesCircle, FaCloudUploadAlt, FaFileAlt } from 'react-icons/fa';
 import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+import { API_URL } from '../services/api';
 
 const AcceptOffer = () => {
   const { id } = useParams(); // selected candidate ID

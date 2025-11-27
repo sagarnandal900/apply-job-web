@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 import { FaCalendar, FaFilter, FaTimes, FaClock, FaVideo, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCheckCircle, FaTimesCircle, FaSpinner, FaBan, FaRedo, FaBell } from 'react-icons/fa';
 import axios from 'axios';
 import InterviewScheduleModal from '../components/InterviewScheduleModal';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+import { API_URL } from '../services/api';
 
 const Interviews = () => {
   const [loading, setLoading] = useState(true);

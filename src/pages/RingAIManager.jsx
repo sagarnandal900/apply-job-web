@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { FaPhone, FaRobot, FaSave, FaCheckCircle, FaExclamationTriangle, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { API_URL } from '../services/api';
 
 const RingAIManager = () => {
   const [config, setConfig] = useState({
@@ -32,7 +33,7 @@ const RingAIManager = () => {
   const fetchConfig = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5001/api/ring-ai', {
+      const response = await fetch(`${API_URL}/ring-ai`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -61,7 +62,7 @@ const RingAIManager = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5001/api/ring-ai', {
+      const response = await fetch(`${API_URL}/ring-ai`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +90,7 @@ const RingAIManager = () => {
   const handleTest = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5001/api/ring-ai/test', {
+      const response = await fetch(`${API_URL}/ring-ai/test`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
