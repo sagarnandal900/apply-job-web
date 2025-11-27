@@ -162,9 +162,7 @@ const Home = () => {
           </div>
         </section>
 
-      {/* Features Section - Enhanced Design */}
-      <section id="features" className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white">
-        {/* Enhanced background with multiple layers */}
+      {/* <section id="features" className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.08),transparent_50%)]"></div>
           <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
@@ -190,7 +188,6 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {/* Feature 1 - Enhanced Card */}
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-orange-200 h-full">
@@ -217,7 +214,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Feature 2 - Enhanced Card */}
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-emerald-200 h-full">
@@ -244,7 +240,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Feature 3 - Enhanced Card */}
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 h-full">
@@ -272,45 +267,49 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
     
 
       {/* Footer */}
-      <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
+      <footer className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 text-white overflow-hidden">
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-400 to-blue-400 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
         </div>
 
         <div className="relative z-10">
           {/* Top Wave Decoration */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500"></div>
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-yellow-400 via-orange-500 to-amber-500"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             {/* Company Logo and Description */}
             {companySettings && (
-              <div className="text-center mb-16">
+              <div className="text-center mb-12">
                 {companySettings.logo && (
-                  <div className="mb-6 flex justify-center">
+                  <div className="mb-8 flex justify-center">
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-purple-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
-                      <img 
-                        src={getLogoUrl(companySettings.logo)}
-                        alt={companySettings.companyName} 
-                        className="relative h-30 w-auto object-contain filter drop-shadow-2xl"
-                        onError={(e) => {
-                          console.error('Failed to load footer logo');
-                          e.target.style.display = 'none';
-                        }}
-                      />
+                      {/* Glow effect behind logo */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 scale-110"></div>
+                      {/* White background for logo visibility */}
+                      <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-white/20">
+                        <img 
+                          src={getLogoUrl(companySettings.logo)}
+                          alt={companySettings.companyName} 
+                          className="h-24 w-auto object-contain"
+                          onError={(e) => {
+                            console.error('Failed to load footer logo');
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
         
                 {companySettings.description && (
-                  <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                  <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
                     {companySettings.description}
                   </p>
                 )}
@@ -321,13 +320,13 @@ const Home = () => {
 
 
             {/* Bottom Bar */}
-            <div className="border-t border-gray-800/50 pt-8">
+            <div className="border-t border-yellow-500/20 pt-8">
               <div className="text-center">
-                <p className="text-gray-500 text-sm mb-2">
-                  &copy; {new Date().getFullYear()} {companySettings?.companyName || 'Job Application Portal'}. All rights reserved.
+                <p className="text-gray-300 text-base font-semibold mb-3">
+                  &copy; {new Date().getFullYear()} <span className="text-yellow-400">{companySettings?.companyName || 'Job Application Portal'}</span>. All rights reserved.
                 </p>
-                <p className="text-gray-600 text-sm">
-                  Made with ❤️ by {companySettings?.companyName || 'Our Team'}
+                <p className="text-gray-400 text-sm font-medium">
+                  Made with <span className="text-red-500 animate-pulse">❤️</span> by <span className="text-orange-400 font-semibold">Wizone </span>
                 </p>
               </div>
             </div>
