@@ -29,5 +29,5 @@ jobs:
           private_key: ""                            # we don’t use key
           password: ${{ secrets.FTP_PASSWORD }}      # your password
           local_path: ./dist/*
-          remote_path: /opt/lampp/htdocs/
+          remote_path: /opt/lampp/htdocs/jobs/
           args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null

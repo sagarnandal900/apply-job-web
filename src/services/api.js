@@ -71,14 +71,25 @@ export const tenantAuthAPI = {
 
 // Super Admin API
 export const superAdminAPI = {
+  // Dashboard
+  getDashboard: () => api.get('/super-admin/dashboard'),
+  
+  // Tenants
   getAllTenants: (params) => api.get('/super-admin/tenants', { params }),
   getTenant: (id) => api.get(`/super-admin/tenants/${id}`),
-  approveTenant: (id) => api.post(`/super-admin/tenants/${id}/approve`),
-  rejectTenant: (id, reason) => api.post(`/super-admin/tenants/${id}/reject`, { reason }),
-  suspendTenant: (id) => api.post(`/super-admin/tenants/${id}/suspend`),
-  updatePayment: (id, data) => api.post(`/super-admin/tenants/${id}/payment`, data),
   updateTenant: (id, data) => api.put(`/super-admin/tenants/${id}`, data),
-  deleteTenant: (id) => api.delete(`/super-admin/tenants/${id}`)
+  deleteTenant: (id) => api.delete(`/super-admin/tenants/${id}`),
+  
+  // Tenant Actions
+  approveTenant: (id, data) => api.post(`/super-admin/tenants/${id}/approve`, data),
+  rejectTenant: (id, reason) => api.post(`/super-admin/tenants/${id}/reject`, { reason }),
+  suspendTenant: (id, reason) => api.post(`/super-admin/tenants/${id}/suspend`, { reason }),
+  reactivateTenant: (id) => api.post(`/super-admin/tenants/${id}/reactivate`),
+  updatePayment: (id, data) => api.post(`/super-admin/tenants/${id}/payment`, data),
+  
+  // Users
+  getAllUsers: (params) => api.get('/super-admin/users', { params }),
+  toggleUserActive: (id) => api.post(`/super-admin/users/${id}/toggle-active`)
 };
 
 // Positions API
