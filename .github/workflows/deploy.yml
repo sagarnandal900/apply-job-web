@@ -9,25 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
 
-      - name: Create PROOF file
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+        # Changed from npm ci to npm install for flexibility
+
+      - name: Build project → creates /build folder
+        run: npm run build
+
+      - name: Create PROOF file (fixed!)
         run: |
-          echo "DEPLOYED AT $(date '+%Y-%m-%d %H:%M:%S')" > dist/PROOF.txt
+          echo "Deployed at $(date '+%Y-%m-%d %H:%M:%S')" > build/PROOF.txt
+          echo "Commit: ${{ github.sha }}" >> build/PROOF.txt
+          echo "By: ${{ github.actor }}" >> build/PROOF.txt
+          echo "Branch: ${{ github.ref_name }}" >> build/PROOF.txt
+          cat build/PROOF.txt
 
-      - name: Deploy via SFTP (port 2211) – uploads every file
+      - name: Deploy via SFTP (Port 2211)
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ secrets.SSH_USER }}          # sagar
-          server: ${{ secrets.FTP_HOST }}            # 72.61.170.243
-          port: ${{ secrets.FTP_PORT }}              # 2211
-          private_key: ""                            # we don’t use key
-          password: ${{ secrets.FTP_PASSWORD }}      # your password
-          local_path: ./dist/*
-          remote_path: /opt/lampp/htdocs/jobs/
-          args: -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+          username: ${{ secrets.SSH_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: 2211
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './build/*'
+          remote_path: /opt/lampp/htdocs/prbk/
+          args: >-
+            -o StrictHostKeyChecking=no
+            -o UserKnownHostsFile=/dev/null
