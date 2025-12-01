@@ -1,10 +1,20 @@
 import axios from 'axios';
 
-// API base URL - change this to your backend URL (SINGLE SOURCE OF TRUTH)
-export const API_URL = import.meta.env.VITE_API_URL || 'https://jobs.wizoneit.com/api/api';
+// ============================================================================
+// API CONFIGURATION - SINGLE SOURCE OF TRUTH
+// ============================================================================
+// ⚠️ CHANGE THESE URLs BASED ON YOUR ENVIRONMENT:
+// - Development: 'http://localhost:5001'
+// - Production: 'https://jobs.wizoneit.com/api'
+// ============================================================================
 
-// Base URL for file/uploads access (https://jobs.wizoneit.com/api)
-export const BASE_URL = 'https://jobs.wizoneit.com/api';
+// 🔧 EDIT HERE TO CHANGE API URL (no env file needed)
+export const API_URL = 'http://localhost:5001/api';          // ← Change this for API calls
+export const BASE_URL = 'http://localhost:5001/api';         // ← Change this for file/image URLs
+
+// ============================================================================
+// AXIOS INSTANCE
+// ============================================================================ 
 
 // Create axios instance
 const api = axios.create({

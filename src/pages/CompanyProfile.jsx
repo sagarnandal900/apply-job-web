@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { companySettingsAPI } from '../services/api';
+import { companySettingsAPI, BASE_URL } from '../services/api';
 import { toast } from 'react-toastify';
 import { 
   FaBuilding, FaEnvelope, FaPhone, FaGlobe, FaMapMarkerAlt, 
@@ -187,7 +187,7 @@ const CompanyProfile = () => {
               <div className="flex items-center gap-6">
                 {companyData.logo ? (
                   <img
-                    src={`${process.env.REACT_APP_API_URL || 'https://jobs.wizoneit.com/api'}${companyData.logo}`}
+                    src={`${BASE_URL}${companyData.logo}`}
                     alt="Company Logo"
                     className="w-32 h-32 object-cover rounded-xl border-2 border-gray-200"
                   />
