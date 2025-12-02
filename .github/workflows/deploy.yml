@@ -25,11 +25,11 @@ jobs:
 
       - name: Create PROOF file (fixed!)
         run: |
-          echo "Deployed at $(date '+%Y-%m-%d %H:%M:%S')" > build/PROOF.txt
-          echo "Commit: ${{ github.sha }}" >> build/PROOF.txt
-          echo "By: ${{ github.actor }}" >> build/PROOF.txt
-          echo "Branch: ${{ github.ref_name }}" >> build/PROOF.txt
-          cat build/PROOF.txt
+          echo "Deployed at $(date '+%Y-%m-%d %H:%M:%S')" > dist/PROOF.txt
+          echo "Commit: ${{ github.sha }}" >> dist/PROOF.txt
+          echo "By: ${{ github.actor }}" >> dist/PROOF.txt
+          echo "Branch: ${{ github.ref_name }}" >> dist/PROOF.txt
+          cat dist/PROOF.txt
 
       - name: Deploy via SFTP (Port 2211)
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -38,8 +38,8 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           port: 2211
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './build/*'
-          remote_path: /opt/lampp/htdocs/prbk/
+          local_path: './dist/*'
+          remote_path: /opt/lampp/htdocs/
           args: >-
             -o StrictHostKeyChecking=no
             -o UserKnownHostsFile=/dev/null
