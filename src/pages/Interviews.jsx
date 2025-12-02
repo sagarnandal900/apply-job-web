@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { FaCalendar, FaFilter, FaTimes, FaClock, FaVideo, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCheckCircle, FaTimesCircle, FaSpinner, FaBan, FaRedo, FaBell } from 'react-icons/fa';
+import { FaCalendar, FaFilter, FaTimes, FaClock, FaVideo, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCheckCircle, FaTimesCircle, FaSpinner, FaBan, FaRedo, FaBell, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
 import InterviewScheduleModal from '../components/InterviewScheduleModal';
 import { API_URL } from '../services/api';
@@ -170,6 +170,29 @@ const Interviews = () => {
     } catch (error) {
       console.error('Error completing interview:', error);
       toast.error('Failed to complete interview');
+    }
+  };
+
+  const deleteInterview = async (id) => {
+    if (!window.confirm('Are you sure you want to permanently delete this interview? This action cannot be undone.')) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(
+        `${API_URL}/interviews/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      if (response.data.success) {
+        toast.success('🗑️ Interview deleted successfully');
+        fetchInterviews();
+        fetchStats();
+      }
+    } catch (error) {
+      console.error('Error deleting interview:', error);
+      toast.error('Failed to delete interview');
     }
   };
 
@@ -433,13 +456,21 @@ const Interviews = () => {
                           </button>
                           <button
                             onClick={() => cancelInterview(interview.id)}
-                            className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm flex items-center gap-1"
+                            className="px-3 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm flex items-center gap-1"
                             title="Cancel"
                           >
                             <FaBan />
                           </button>
                         </>
                       )}
+                      {/* Delete button - always visible for all statuses */}
+                      <button
+                        onClick={() => deleteInterview(interview.id)}
+                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm flex items-center gap-1"
+                        title="Delete Interview"
+                      >
+                        <FaTrash />
+                      </button>
                     </div>
                   </div>
                 </div>

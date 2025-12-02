@@ -9,8 +9,8 @@ import axios from 'axios';
 // ============================================================================
 
 // 🔧 EDIT HERE TO CHANGE API URL (no env file needed)
-export const API_URL = 'http://localhost:5001/api';          // ← Change this for API calls
-export const BASE_URL = 'http://localhost:5001/api';         // ← Change this for file/image URLs
+export const API_URL = 'https://jobs.wizoneit.com/api/api';          // ← Change this for API calls
+export const BASE_URL = 'https://jobs.wizoneit.com/api/api';         // ← Change this for file/image URLs
 
 // ============================================================================
 // AXIOS INSTANCE
